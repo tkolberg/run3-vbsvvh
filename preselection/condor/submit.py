@@ -28,7 +28,7 @@ import uproot
 
 # Constants
 CONDOR_OUTPUT_DIR = "jobs"
-OUTPUT_XRD = "root://redirector.t2.ucsd.edu:1095//store/user/{user}/vbsvvh/preselection/run3-vbsvvh"
+OUTPUT_XRD = "root://redir.t2.ucsd.edu:1095//store/user/{user}/vbsvvh/preselection/run3-vbsvvh"
 DEFAULT_FILES_PER_JOB = 10
 DEFAULT_NCPUS = 4
 DEFAULT_MEMORY = "2G"
@@ -210,8 +210,8 @@ def parse_xrootd_url(url: str) -> tuple:
     """
     Parse an xrootd URL into (host, path) components.
 
-    Example: root://redirector.t2.ucsd.edu:1095//store/user/foo/bar
-    Returns: ("redirector.t2.ucsd.edu:1095", "/store/user/foo/bar")
+    Example: root://redir.t2.ucsd.edu:1095//store/user/foo/bar
+    Returns: ("redir.t2.ucsd.edu:1095", "/store/user/foo/bar")
     """
     remainder = url[len("root://"):]
     slash_idx = remainder.index("/")
@@ -224,7 +224,7 @@ def expand_xrootd_glob(file_pattern: str) -> List[str]:
     """
     Expand a glob pattern for xrootd paths using xrdfs ls.
 
-    Example pattern: root://redirector.t2.ucsd.edu:1095//store/user/foo/bar/*.root
+    Example pattern: root://redir.t2.ucsd.edu:1095//store/user/foo/bar/*.root
     """
     host, full_path = parse_xrootd_url(file_pattern)
     directory = os.path.dirname(full_path)

@@ -25,7 +25,7 @@ OUT_DIR="/cmsuf/data/store/user/$CERN_USER/vbs_vvh_rdf"
 #OUT_DIR="/data/userdata/$USER/vbs_vvh_rdf"
 
 # UAF via xrd
-#PREFIX="root://redirector.t2.ucsd.edu:1095//"
+#PREFIX="root://redir.t2.ucsd.edu:1095//"
 #OUT_DIR="/data/userdata/$USER/vbs_vvh_rdf"
 
 mkdir -p "$OUT_DIR"
