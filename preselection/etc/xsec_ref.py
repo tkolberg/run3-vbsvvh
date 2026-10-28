@@ -429,11 +429,11 @@ xsec_dict = {
             "WJetsToQQ_HT-400to600_TuneCP5_13TeV"                      : 276.5,
             "WJetsToQQ_HT-600to800_TuneCP5_13TeV"                      : 59.25,
             "WJetsToQQ_HT-800toInf_TuneCP5_13TeV"                      : 28.75,
-            "EWKWminus2Jets_WToQQ_dipoleRecoilOn_TuneCP5_13TeV"        : 10.67,
-            "EWKWplus2Jets_WToQQ_dipoleRecoilOn_TuneCP5_13TeV"         : 10.67,
+            "EWKWminus2Jets_WToQQ_dipoleRecoilOn_TuneCP5_13TeV"        : 19.47,  # GenXSecAnalyzer on the UL gridpack (was 10.67 = the Z->nunu value)
+            "EWKWplus2Jets_WToQQ_dipoleRecoilOn_TuneCP5_13TeV"         : 28.70,  # GenXSecAnalyzer on the UL gridpack (was 10.67)
             "EWKZ2Jets_ZToLL_M-50_TuneCP5_withDipoleRecoil_13TeV"      : 6.22,
             "EWKZ2Jets_ZToNuNu_M-50_TuneCP5_withDipoleRecoil_13TeV"    : 10.72,
-            "EWKZ2Jets_ZToQQ_dipoleRecoilOn_TuneCP5_13TeV"             : 10.67,
+            "EWKZ2Jets_ZToQQ_dipoleRecoilOn_TuneCP5_13TeV"             : 9.775,  # GenXSecAnalyzer on the UL gridpack (was 10.67)
             "TTWJetsToQQ_TuneCP5_13TeV"                                : 0.4377,
             "TTWW_TuneCP5_13TeV"                                       : 0.0115,
             "TTWZ_TuneCP5_13TeV"                                       : 0.003884,
