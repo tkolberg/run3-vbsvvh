@@ -280,7 +280,7 @@ def make_json_for_dataset(dataset_info, path, kind, xsec_dict, skim_set_name, ru
     # Return the output path and content; main() writes them once the whole skim set has
     # been processed, so an abort part-way through never leaves a skim set half updated.
     # (Split by run so Run 2 and Run 3 JSONs never co-locate.)
-    out_path = f"input_sample_jsons/{run_tag}/{kind}/{skim_set_name}/{year}_{dataset_name_short}.json"
+    out_path = f"{JSON_ROOT}/{run_tag}/{kind}/{skim_set_name}/{year}_{dataset_name_short}.json"
     return out_path, {"samples": {dataset_name: out_dict}}
 
 
@@ -296,8 +296,11 @@ SKIM_PATH_DICT_2026 = {
     **{ch : {("run3", k) : f"{SKIM_ROOT_2026}/Run3_{K}_v15_2026_{tag}" for k, K in (("bkg", "Bkg"), ("data", "Data"))}
        for ch, tag in (("0lep_1FJ", "0Lep1FJ"), ("0lep_2FJ", "0Lep2FJ"))},
 }
+# 2026 JSONs go to their own tree, so a v30 job that globs input_sample_jsons/ never picks them up.
+JSON_ROOT = "input_sample_jsons"
 if os.environ.get("SKIM_PATH_SET") == "2026":
     SKIM_PATH_DICT = SKIM_PATH_DICT_2026
+    JSON_ROOT = "input_sample_jsons_2026"
 
 def main():
 
@@ -318,7 +321,7 @@ def main():
 
             # Get the list of datasets we actaully have at this skim path, and list we expect
             path_to_skims = SKIM_PATH_DICT[skim_set_name][(run_tag,kind)]
-            paths_to_current_jsons = f"input_sample_jsons/{run_tag}/{kind}/{skim_set_name}"
+            paths_to_current_jsons = f"{JSON_ROOT}/{run_tag}/{kind}/{skim_set_name}"
             havejson_ds_set = set(get_ds_names_from_jsons(paths_to_current_jsons))
             haveskim_ds_set = set(os.listdir(path_to_skims))
             haveref_ds_set  = set(d["dataset_name"] for d in known_datasets_lst)

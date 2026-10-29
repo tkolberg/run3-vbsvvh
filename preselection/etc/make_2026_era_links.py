@@ -11,6 +11,8 @@ Absolute links: the jobs read the /cmsuf mount directly.
 """
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+if os.environ.get("SKIM_PATH_SET") == "2026":
+    sys.exit("unset SKIM_PATH_SET: the link sources are the v30 skim paths")
 import dataset_names_ref as ref
 from make_sample_jsons import SKIM_PATH_DICT, SKIM_PATH_DICT_2026
 
