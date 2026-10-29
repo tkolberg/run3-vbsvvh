@@ -91,6 +91,9 @@ const std::map<std::string, EraJERC>& eraJERCTable() {
         {"2024Prompt",           {"Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15", "2026-07-16", "Summer24Prompt24_V5",        "Summer24Prompt24_JRV2",           "2024"}},
         // 2025 data + Summer24 MC — JME-recommended Summer24Prompt25 (JEC + JER + JES self-contained).
         {"2025",                 {"Run3-25Prompt-Summer24-NanoAODv15",                    "2026-07-16", "Summer24Prompt25_V3",        "Summer24Prompt25_JRV2",           "2025"}},
+        // 2026 data + Summer24 MC -- first JME recommendation (2026-07-15). JER is
+        // RunBD: era C is a low-PU run with no golden lumisection.
+        {"2026",                 {"Run3-26Prompt-Summer24-NanoAODv15",                    "2026-07-15", "Summer24Prompt26_V1",        "Summer24Prompt26_RunBD_JRV1",     "2026"}},
     };
     return table;
 }
@@ -187,6 +190,8 @@ const CSetMap& btaggingCorrections() {
             {"2023PromptD",           "Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15"},
             {"2024Prompt",            "Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15"},
             {"2025",                  "Run3-25Prompt-Summer24-NanoAODv15"},
+            // No 2026 BTV payload yet: 2026 reuses 2025 (assumption, plan DATA2026).
+            {"2026",                  "Run3-25Prompt-Summer24-NanoAODv15"},
         };
         CSetMap out;
         for (const auto& [year, dir] : eras)
@@ -275,6 +280,8 @@ const std::map<std::string, EraVetoMap>& eraVetoMapTable() {
         {"2023PromptD",          {"Run3-23DSep23-Summer23BPix-NanoAODv12",                "2026-07-15", "Summer23BPixPrompt23_RunD_V1"}},
         {"2024Prompt",           {"Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15", "2026-07-16", "Summer24Prompt24_RunBCDEFGHI_V1"}},
         {"2025",                 {"Run3-25Prompt-Summer24-NanoAODv15",                    "2026-07-16", "Summer24Prompt25_RunCDEFG_V1"}},
+        // 2026 veto map: JME cloned the 2025 map under this tag.
+        {"2026",                 {"Run3-26Prompt-Summer24-NanoAODv15",                    "2026-07-15", "Summer24Prompt26_RunBCD_V1"}},
     };
     return table;
 }
@@ -311,7 +318,8 @@ const CSetMap& electronSSCorrections() {
         {"2023PromptC",           *CorrectionSet::from_file("/cvmfs/cms-griddata.cern.ch/cat/metadata/EGM/Run3-23CSep23-Summer23-NanoAODv12/2025-12-15/electronSS_EtDependent.json.gz")},
         {"2023PromptD",           *CorrectionSet::from_file("/cvmfs/cms-griddata.cern.ch/cat/metadata/EGM/Run3-23DSep23-Summer23BPix-NanoAODv12/2025-12-15/electronSS_EtDependent.json.gz")},
         {"2024Prompt",            *CorrectionSet::from_file("/cvmfs/cms-griddata.cern.ch/cat/metadata/EGM/Run3-24CDEReprocessingFGHIPrompt-Summer24-NanoAODv15/2025-12-15/electronSS_EtDependent.json.gz")},
-        {"2025",                  *CorrectionSet::from_file("/cvmfs/cms-griddata.cern.ch/cat/metadata/EGM/Run3-25Prompt-Summer24-NanoAODv15/2026-06-26/electronSS_EtDependent.json.gz")}
+        {"2025",                  *CorrectionSet::from_file("/cvmfs/cms-griddata.cern.ch/cat/metadata/EGM/Run3-25Prompt-Summer24-NanoAODv15/2026-06-26/electronSS_EtDependent.json.gz")},
+        {"2026",                  *CorrectionSet::from_file("/cvmfs/cms-griddata.cern.ch/cat/metadata/EGM/Run3-26Prompt-Summer24-NanoAODv15/2026-06-08/electronSS_EtDependent.json.gz")}
     };
     return m;
 }

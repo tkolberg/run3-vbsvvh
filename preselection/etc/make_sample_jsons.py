@@ -85,7 +85,10 @@ LUMI_DICT = {
     "2022": 34.76,
     "2023": 28.28,
     "2024Prompt": 109.95,
-    "2025": 110.84
+    "2025": 110.84,
+    # PRELIMINARY: brilcalc recorded lumi, normtag_BRIL, golden 401624-403937
+    # (normtag_PHYSICS has no 2026 table yet; recheck when it appears).
+    "2026": 25.79
 }
 
 
@@ -285,6 +288,17 @@ def make_json_for_dataset(dataset_info, path, kind, xsec_dict, skim_set_name, ru
 
 ################# Main function #################
 
+# SKIM_PATH_SET=2026 builds only the 2026 era: data skimmed into our /blue tree,
+# MC as Summer24for2026 links to the v30 Summer24 skims in the same tree.
+SKIM_ROOT_2026 = "/blue/avery/tkolberg.fsu/vbs/samples/skim/VBSVVH_skim_2026"
+SKIM_PATH_DICT_2026 = {
+    "all_events" : {("run3", "sig") : f"{SKIM_ROOT_2026}/Run3_Sig_v15_2026_Sig"},
+    **{ch : {("run3", k) : f"{SKIM_ROOT_2026}/Run3_{K}_v15_2026_{tag}" for k, K in (("bkg", "Bkg"), ("data", "Data"))}
+       for ch, tag in (("0lep_1FJ", "0Lep1FJ"), ("0lep_2FJ", "0Lep2FJ"))},
+}
+if os.environ.get("SKIM_PATH_SET") == "2026":
+    SKIM_PATH_DICT = SKIM_PATH_DICT_2026
+
 def main():
 
     # Loop over the skim sets (e.g., 3lep)
@@ -354,4 +368,5 @@ def main():
 
 
 
-main()
+if __name__ == "__main__":
+    main()

@@ -1010,6 +1010,14 @@ datasets = {
         {"year": "2025", "dataset_name": "JetMET1_Run2025F-PromptReco-v2_NANOAOD"},
         {"year": "2025", "dataset_name": "JetMET1_Run2025G-PromptReco-v1_NANOAOD"},
 
+        # 2026: eras A, B, D hold every golden run; 2026C (low-PU) has none
+        {"year": "2026", "dataset_name": "JetMET0_Run2026A-PromptReco-v1_NANOAOD"},
+        {"year": "2026", "dataset_name": "JetMET0_Run2026B-PromptReco-v1_NANOAOD"},
+        {"year": "2026", "dataset_name": "JetMET0_Run2026D-PromptReco-v1_NANOAOD"},
+        {"year": "2026", "dataset_name": "JetMET1_Run2026A-PromptReco-v1_NANOAOD"},
+        {"year": "2026", "dataset_name": "JetMET1_Run2026B-PromptReco-v1_NANOAOD"},
+        {"year": "2026", "dataset_name": "JetMET1_Run2026D-PromptReco-v1_NANOAOD"},
+
         {"year": "2025", "dataset_name": "EGamma0_Run2025B-PromptReco-v1_NANOAOD"},
         {"year": "2025", "dataset_name": "EGamma0_Run2025C-PromptReco-v1_NANOAOD"},
         {"year": "2025", "dataset_name": "EGamma0_Run2025C-PromptReco-v2_NANOAOD"},
@@ -1090,10 +1098,11 @@ datasets = {
 # handling. The suffix must match the symlink names on disk.
 
 MC_ERA_CLONE_SUFFIX = "Summer24for2025"
+MC_ERA_CLONE_SUFFIX_2026 = "Summer24for2026"
 
 mc_era_clones = {
-    ("run3", "sig") : [("2024Prompt", "2025", MC_ERA_CLONE_SUFFIX)],
-    ("run3", "bkg") : [("2024Prompt", "2025", MC_ERA_CLONE_SUFFIX)],
+    ("run3", "sig") : [("2024Prompt", "2025", MC_ERA_CLONE_SUFFIX), ("2024Prompt", "2026", MC_ERA_CLONE_SUFFIX_2026)],
+    ("run3", "bkg") : [("2024Prompt", "2025", MC_ERA_CLONE_SUFFIX), ("2024Prompt", "2026", MC_ERA_CLONE_SUFFIX_2026)],
 }
 
 # For each (run_tag, kind) above, copy every dataset whose year is src_year, re-tag the
@@ -1214,6 +1223,7 @@ datasets_excluded = [
 # from, so compare against the stripped name).
 def is_excluded(dataset_name):
     base = dataset_name
-    if base.endswith(MC_ERA_CLONE_SUFFIX):
-        base = base[: -len(MC_ERA_CLONE_SUFFIX)]
+    for sfx in (MC_ERA_CLONE_SUFFIX, MC_ERA_CLONE_SUFFIX_2026):
+        if base.endswith(sfx):
+            base = base[: -len(sfx)]
     return base in datasets_excluded

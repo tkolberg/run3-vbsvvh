@@ -30,7 +30,7 @@ inline double bTagMaxAbsEta(const std::string &year) {
 // Clamp only the SF lookup coordinate to the valid payload domain; do not
 // discard those jets.
 inline double bTagSFAbsEta(const std::string &year, double eta) {
-    const double payload_max = (year == "2024Prompt" || year == "2025") ? 2.5 : 2.4;
+    const double payload_max = (year == "2024Prompt" || year == "2025" || year == "2026") ? 2.5 : 2.4;
     return std::min(std::abs(eta), std::nextafter(payload_max, 0.0));
 }
 

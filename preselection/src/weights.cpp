@@ -80,8 +80,13 @@ constexpr std::array<BTagJESMapping, 11> kBTagJES2025Mapping = {{
 
 bool bTagHFSourceAvailable(const std::string &year, std::string_view source);
 
+// No 2026 BTV payload yet: 2026 MC reads the 2025 payload and its source list.
+std::string bTagPayloadYear(std::string_view year) {
+    return year == "2026" ? "2025" : std::string(year);
+}
+
 BTagJESScheme bTagJESSchemeForYear(std::string_view year) {
-    if (year == "2025") return BTagJESScheme::Regrouped11;
+    if (bTagPayloadYear(year) == "2025") return BTagJESScheme::Regrouped11;
     if (year == "2024Prompt" || bTagHFSourceAvailable(std::string(year), "jes"))
         return BTagJESScheme::Total;
     return BTagJESScheme::None;
@@ -95,14 +100,14 @@ bool bTagHFSourceIsRegroupedJES(std::string_view source) {
 }
 
 bool bTagHFSourceAvailable(const std::string &year, std::string_view source) {
-    const auto year_it = kBTagHFAvailableSources.find(year);
+    const auto year_it = kBTagHFAvailableSources.find(bTagPayloadYear(year));
     return year_it != kBTagHFAvailableSources.end() && year_it->second.count(std::string(source));
 }
 
 // Keep public branch names logical and translate only the 2025 payload label.
 std::string bTagHFPayloadSource(const std::string &year, std::string_view source) {
     if (!bTagHFSourceAvailable(year, source)) return {};
-    if (year == "2025" && source == "topmass") return "mass";
+    if (bTagPayloadYear(year) == "2025" && source == "topmass") return "mass";
     return std::string(source);
 }
 
@@ -343,7 +348,7 @@ const BTagFamilyConfig &bTagFamilyConfig(const std::string &year) {
 }
 
 std::string bTagEfficiencyPayloadYear(std::string_view year) {
-    return year == "2025" ? "2024Prompt" : std::string(year);
+    return (year == "2025" || year == "2026") ? "2024Prompt" : std::string(year);
 }
 
 double unityForInvalidBTagWeight(std::atomic<unsigned long long> &counter) {
@@ -716,6 +721,7 @@ ELECTRON SFs
 static std::string egmYearKey(const std::string& year) {
     static const std::unordered_map<std::string, std::string> m = {
         {"2025", "2025Prompt"},
+        {"2026", "2025Prompt"},  // 2026 reads the 2025 EGM payload
     };
     auto it = m.find(year);
     return (it == m.end()) ? year : it->second;
