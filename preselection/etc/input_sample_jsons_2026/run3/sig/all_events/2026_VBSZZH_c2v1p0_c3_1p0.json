@@ -1,0 +1,22 @@
+{
+    "samples": {
+        "VBSZZH_c2v1p0_c3_1p0_Run3Summer24Summer24for2026": {
+            "trees": [
+                "Events"
+            ],
+            "files": [
+                "VBSVVH_skim_2026/Run3_Sig_v15_2026_Sig/VBSZZH_c2v1p0_c3_1p0_Run3Summer24Summer24for2026/output_1.root"
+            ],
+            "metadata": {
+                "kind": "sig",
+                "year": "2026",
+                "xsec": 0.000125,
+                "lumi": 25.79,
+                "shortname": "VBSZZH_c2v1p0_c3_1p0",
+                "do_ewk_corr": 0,
+                "local_prefix": "/blue/avery/tkolberg.fsu/vbs/samples/skim/",
+                "sumw": 100000.0
+            }
+        }
+    }
+}
