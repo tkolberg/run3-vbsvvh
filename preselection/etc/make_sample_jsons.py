@@ -193,6 +193,8 @@ def sum_runs_summaries(lst_of_file_metadata_jsons,dataset_fullpath):
 # Given a path to dir of jsons, pull all the ds names from all jsons in the dir and put them into a list
 def get_ds_names_from_jsons(path_to_jsons):
     ds_names_lst = []
+    # a fresh JSON tree (e.g. the first SKIM_PATH_SET=2026 build) has no jsons yet
+    if not os.path.isdir(path_to_jsons): return ds_names_lst
     json_names = os.listdir(path_to_jsons)
     for json_name in json_names:
         with open(os.path.join(path_to_jsons,json_name)) as jf:
