@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=skim26_k5_check
-#SBATCH --array=0-5
+#SBATCH --array=0,2,3,5
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8gb

@@ -34,9 +34,11 @@ for task in [a for a in sys.argv[1:] if not a.startswith("--")]:
     sb = open(f"{task}/array.sbatch").read().split("\n")[-2].split()
     outdir, ch = sb[5], sb[6]
     per_ds = collections.defaultdict(list)
-    for c in cfgs:
+    # job_list.txt: <job dir> <sample> <job index>; single-job samples have no _<idx> dir suffix
+    jobs = [l.split() for l in open(f"{task}/job_list.txt") if l.strip()]
+    cfgs = [f"{task}/{d}/config.json" for d, _, _ in jobs]
+    for c, (_, _, idx) in zip(cfgs, jobs):
         cfg = json.load(open(c)); (ds, s), = cfg["samples"].items()
-        idx = os.path.basename(os.path.dirname(c)).rsplit("_", 1)[1]
         out = f"{outdir}/{ds}/output_{idx}.root"
         if not os.path.exists(out):
             bad["missing"] += 1; print("MISSING", out); continue
