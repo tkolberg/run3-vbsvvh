@@ -8,11 +8,13 @@ set -uo pipefail
 SLICE=200; MARGIN=50; CAP=3000
 LOG=/blue/avery/tkolberg.fsu/vbs/samples/skim/VBSVVH_skim_2026/tasks/logs/k5_feed.log
 for A in "$@"; do
-  D=$(dirname $A); N=$(grep -o -- '--array=0-[0-9]*' $A | cut -d- -f3)
+  D=$(dirname $A); N=$(sed -n 's/^#SBATCH --array=0-\([0-9]*\)$/\1/p' $A)
+  [[ "$N" =~ ^[0-9]+$ ]] || { echo "[feed] no --array=0-N in $A" >> $LOG; exit 2; }
   for (( lo=0; lo<=N; lo+=SLICE )); do
     hi=$(( lo+SLICE-1 < N ? lo+SLICE-1 : N ))
     S=$D/slice_${lo}_${hi}.sbatch
     sed "s/^#SBATCH --array=0-$N\$/#SBATCH --array=$lo-$hi/" $A > $S
+    grep -q "^#SBATCH --array=$lo-$hi\$" $S || { echo "[feed] slice rewrite failed for $S" >> $LOG; exit 2; }
     while :; do
       used=$(squeue -u $USER -q avery-b -h -r 2>/dev/null | wc -l)
       [ $(( CAP - used )) -ge $(( hi-lo+1+MARGIN )) ] && break
