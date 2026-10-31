@@ -1,0 +1,41 @@
+{
+ "samples": {
+  "VBSWmWmToLNuJJ_5f_LO_Run3Summer24_WWJJfamSummer24for2026": {
+   "trees": [
+    "Events"
+   ],
+   "files": [
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_0.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_1.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_2.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_3.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_4.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_5.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_6.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_7.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_8.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_9.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_10.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_11.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_12.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_13.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_14.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_15.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_16.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_17.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_18.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/2024/VBSWmWmToLNuJJ_5f_LO/output_19.root"
+   ],
+   "metadata": {
+    "kind": "bkg",
+    "year": "2026",
+    "xsec": 0.0536,
+    "lumi": 25.79,
+    "shortname": "VBSWmWmToLNuJJ_5f_LO",
+    "do_ewk_corr": 0,
+    "local_prefix": "/blue/avery/tkolberg.fsu/vbs/samples/vbsww-run3/skim_1fj_veto_2m_20261020/",
+    "sumw": 2000000.0
+   }
+  }
+ }
+}

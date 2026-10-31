@@ -1,0 +1,41 @@
+{
+ "samples": {
+  "VBS_ZZTo2Nu2Q_5f_LO_EWK_Run3Summer24_ZZJJfamSummer24for2026": {
+   "trees": [
+    "Events"
+   ],
+   "files": [
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_0.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_1.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_2.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_3.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_4.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_5.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_6.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_7.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_8.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_9.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_10.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_11.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_12.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_13.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_14.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_15.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_16.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_17.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_18.root",
+    "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/2024/VBS_ZZTo2Nu2Q_5f_LO_EWK/output_19.root"
+   ],
+   "metadata": {
+    "kind": "bkg",
+    "year": "2026",
+    "xsec": 0.03458,
+    "lumi": 25.79,
+    "shortname": "VBS_ZZTo2Nu2Q_5f_LO_EWK",
+    "do_ewk_corr": 0,
+    "local_prefix": "/blue/avery/tkolberg.fsu/vbs/samples/zz-nunu-run3/skim_1fj/",
+    "sumw": 1945000.0
+   }
+  }
+ }
+}
