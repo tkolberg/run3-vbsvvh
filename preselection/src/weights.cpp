@@ -85,7 +85,14 @@ std::string bTagPayloadYear(std::string_view year) {
     return year == "2026" ? "2025" : std::string(year);
 }
 
+// The 2025 payload's JES/JER responses belong to the 2025 calibration
+// (Summer24Prompt25_V3 / JRV2). 2026 jets carry Summer24Prompt26_V1 / JRV1, so
+// those responses must not ride on the 2026 kinematic variations: 2026 gets no
+// b-tag JES/JER companions until BTV ships a 2026 payload.
+bool bTagHFSourceIsCalibrationResponse(std::string_view source);
+
 BTagJESScheme bTagJESSchemeForYear(std::string_view year) {
+    if (year == "2026") return BTagJESScheme::None;
     if (bTagPayloadYear(year) == "2025") return BTagJESScheme::Regrouped11;
     if (year == "2024Prompt" || bTagHFSourceAvailable(std::string(year), "jes"))
         return BTagJESScheme::Total;
@@ -99,7 +106,12 @@ bool bTagHFSourceIsRegroupedJES(std::string_view source) {
                         }) != kBTagJES2025Mapping.end();
 }
 
+bool bTagHFSourceIsCalibrationResponse(std::string_view source) {
+    return source == "jes" || source == "jer" || bTagHFSourceIsRegroupedJES(source);
+}
+
 bool bTagHFSourceAvailable(const std::string &year, std::string_view source) {
+    if (year == "2026" && bTagHFSourceIsCalibrationResponse(source)) return false;
     const auto year_it = kBTagHFAvailableSources.find(bTagPayloadYear(year));
     return year_it != kBTagHFAvailableSources.end() && year_it->second.count(std::string(source));
 }
