@@ -125,11 +125,6 @@ public:
         LumiBlock m_lastLumi;
     };
 
-// Optional per-sample lumi mask on top of the golden JSON (data only): a sample whose
-// metadata names "lumi_mask_json" keeps only the sections listed there. Used for eras
-// whose skims cover the golden JSON only partly, so data and luminosity use one list.
-RNode applySampleLumiMask(RNode df);
-
     explicit lumiMask(const std::vector<LumiBlockRange>& accept) : m_accept(accept) {
         std::sort(m_accept.begin(), m_accept.end());
     }
@@ -143,6 +138,12 @@ RNode applySampleLumiMask(RNode df);
 private:
     std::vector<LumiBlockRange> m_accept;
 };
+
+// Optional per-sample lumi mask on top of the golden JSON (data only): a sample whose
+// metadata names "lumi_mask_json" keeps only the sections listed there. Used for eras
+// whose skims cover the golden JSON only partly, so data and luminosity use one list.
+RNode applySampleLumiMask(RNode df);
+
 
 bool operator< ( const lumiMask::LumiBlockRange& lh, const lumiMask::LumiBlockRange& rh );
 
