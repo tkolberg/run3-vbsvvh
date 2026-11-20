@@ -5,7 +5,8 @@ their overlap twice, split across output files that land in different RDF
 jobs. A first-seen filter inside one job cannot see the other copy, so the
 choice of which copy survives is made here, once, over the whole dataset:
 the copy in the first file (sorted path order) is kept, every later copy is
-vetoed. RDF reads <veto_dir>/<input file basename>.u64 and drops those events
+vetoed. RDF reads <veto_dir>/<input file basename>.u64 (word 0: the file's entry
+count; then the keys) and drops those events
 (utils.cpp: applyDedupVeto).
 
 Key packing (must match utils.h: dedupKey): (run - 355000) << 50 | lumi << 37 | event,
@@ -51,8 +52,9 @@ def main(out, dirs):
         v = np.unique(k[sel & ~first])
         if np.intersect1d(v, k[sel & first]).size:
             raise SystemExit(f"{f}: same event twice inside one file; a key veto would drop both")
-        if v.size:
-            v.astype("<u8").tofile(f"{out}/{names[i]}.u64"); n_veto += v.size
+        # every file gets one, empty or not, so RDF can treat a missing veto as an error;
+        # word 0 is the file's entry count, which RDF checks against the file it reads
+        np.r_[np.uint64(sel.sum()), v].astype("<u8").tofile(f"{out}/{names[i]}.u64"); n_veto += v.size
     # for each vetoed file, the file holding most of the kept copies (used to pick test pairs)
     order = np.argsort(k, kind="stable"); ks = k[order]; fs = fi[order]
     starts = np.r_[0, np.flatnonzero(np.diff(ks)) + 1]
@@ -66,7 +68,7 @@ def main(out, dirs):
             P.write(f"{files[a]} {files[b]} {c} {int((fi == a).sum())}\n")
     n = len(k); u = int(first.sum())
     print(f"dedup files={len(files)} events={n} unique={u} vetoed={n_veto} ({n_veto/max(1,n):.4%}) "
-          f"files_with_veto={len(glob.glob(out+'/*.u64'))} out={out}", flush=True)
+          f"veto_files={len(glob.glob(out+'/*.u64'))} out={out}", flush=True)
     assert n - u == n_veto
 
 

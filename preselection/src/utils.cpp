@@ -1,3 +1,5 @@
+#include <TTree.h>
+#include <TFile.h>
 #include <unordered_map>
 #include <mutex>
 #include <fstream>
@@ -123,13 +125,23 @@ DedupVetoSet loadDedupVeto(const std::string &dir, const std::string &fileId) {
     std::lock_guard<std::mutex> lock(mtx);
     auto it = cache.find(path);
     if (it != cache.end()) return it->second;
-    auto keys = std::make_shared<std::unordered_set<unsigned long long>>();
+    // make_veto.py writes one file per skim file, so a missing one means a wrong dir, an
+    // unreadable path or a skim the veto was not built for -- never "nothing to veto"
     std::ifstream in(path, std::ios::binary);
-    if (in) {  // no file = nothing to veto in this input
-        unsigned long long k;
-        while (in.read(reinterpret_cast<char *>(&k), sizeof k)) keys->insert(k);
-    }
-    std::cout << " -> dedup veto " << path << ": " << keys->size() << " events" << std::endl;
+    unsigned long long nEntries = 0;
+    if (!in || !in.read(reinterpret_cast<char *>(&nEntries), sizeof nEntries))
+        throw std::runtime_error("applyDedupVeto: cannot read veto file " + path);
+    // the veto is only valid for the skim it was built from
+    std::string tree = fileId.substr(end + 6);
+    std::unique_ptr<TFile> tf(TFile::Open(file.c_str()));
+    auto *tt = tf ? tf->Get<TTree>(tree.c_str()) : nullptr;
+    if (!tt || static_cast<unsigned long long>(tt->GetEntries()) != nEntries)
+        throw std::runtime_error("applyDedupVeto: " + file + " has " + std::to_string(tt ? tt->GetEntries() : -1) +
+                                 " entries, veto " + path + " was built for " + std::to_string(nEntries));
+    auto keys = std::make_shared<std::unordered_set<unsigned long long>>();
+    unsigned long long k;
+    while (in.read(reinterpret_cast<char *>(&k), sizeof k)) keys->insert(k);
+    std::cout << " -> dedup veto " << path << ": " << keys->size() << " of " << nEntries << " events" << std::endl;
     return cache[path] = keys;
 }
 }  // namespace
