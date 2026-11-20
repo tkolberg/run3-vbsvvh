@@ -137,7 +137,12 @@ DedupVetoSet loadDedupVeto(const std::string &dir, const std::string &fileId) {
 RNode applyDedupVeto(RNode df) {
     return df
         .DefinePerSample("_dedup_veto", [](unsigned int, const RSampleInfo &id) -> DedupVetoSet {
-            std::string dir = id.GetS("dedup_veto_dir", "");
+            std::string dir;
+            try {
+                dir = id.GetS("dedup_veto_dir");
+            } catch (const std::logic_error &) {  // key absent: this sample has no veto (RSampleInfo has no default overload)
+                return DedupVetoSet{};
+            }
             return dir.empty() ? DedupVetoSet{} : loadDedupVeto(dir, id.AsString());
         })
         .Filter([](const DedupVetoSet &veto, unsigned int run, unsigned int lumi, unsigned long long event) {
