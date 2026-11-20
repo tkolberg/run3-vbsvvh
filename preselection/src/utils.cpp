@@ -1,3 +1,6 @@
+#include <unordered_map>
+#include <mutex>
+#include <fstream>
 #include "utils.h"
 
 #include <algorithm>
@@ -98,6 +101,49 @@ std::vector<std::string> getMCYearsFromConfig(const std::string& config_path) {
 
 RNode removeDuplicates(RNode df){
     return df.Filter(FilterOnePerKind(), {"run", "luminosityBlock", "event"}, "REMOVED DUPLICATES");
+}
+
+unsigned long long dedupKey(unsigned int run, unsigned int lumi, unsigned long long event) {
+    // (run - 355000) << 50 | lumi << 37 | event  -- see etc/dedup/make_veto.py
+    if (run < 355000u || run - 355000u >= (1u << 14) || lumi >= (1u << 13) || event >= (1ull << 37))
+        throw std::runtime_error("dedupKey: run/lumi/event outside the packed range: " + std::to_string(run) + ":" +
+                                 std::to_string(lumi) + ":" + std::to_string(event));
+    return (static_cast<unsigned long long>(run - 355000u) << 50) | (static_cast<unsigned long long>(lumi) << 37) | event;
+}
+
+namespace {
+DedupVetoSet loadDedupVeto(const std::string &dir, const std::string &fileId) {
+    static std::mutex mtx;
+    static std::unordered_map<std::string, DedupVetoSet> cache;
+    // RSampleInfo::AsString() is "<file>/<tree>"; keep the basename of <file>
+    auto end = fileId.rfind(".root");
+    if (end == std::string::npos) throw std::runtime_error("applyDedupVeto: no .root in sample id " + fileId);
+    std::string file = fileId.substr(0, end + 5);
+    std::string path = dir + "/" + file.substr(file.rfind('/') + 1) + ".u64";
+    std::lock_guard<std::mutex> lock(mtx);
+    auto it = cache.find(path);
+    if (it != cache.end()) return it->second;
+    auto keys = std::make_shared<std::unordered_set<unsigned long long>>();
+    std::ifstream in(path, std::ios::binary);
+    if (in) {  // no file = nothing to veto in this input
+        unsigned long long k;
+        while (in.read(reinterpret_cast<char *>(&k), sizeof k)) keys->insert(k);
+    }
+    std::cout << " -> dedup veto " << path << ": " << keys->size() << " events" << std::endl;
+    return cache[path] = keys;
+}
+}  // namespace
+
+RNode applyDedupVeto(RNode df) {
+    return df
+        .DefinePerSample("_dedup_veto", [](unsigned int, const RSampleInfo &id) -> DedupVetoSet {
+            std::string dir = id.GetS("dedup_veto_dir", "");
+            return dir.empty() ? DedupVetoSet{} : loadDedupVeto(dir, id.AsString());
+        })
+        .Filter([](const DedupVetoSet &veto, unsigned int run, unsigned int lumi, unsigned long long event) {
+                    return !veto || veto->empty() || !veto->count(dedupKey(run, lumi, event));
+                },
+                {"_dedup_veto", "run", "luminosityBlock", "event"}, "DEDUP VETO");
 }
 
 RNode applyObjectMask(RNode df, const std::string& maskName, const std::string& objectName) {

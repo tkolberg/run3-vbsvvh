@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <unordered_set>
+#include <memory>
 #include <limits>
 #include <filesystem>
 
@@ -63,6 +65,16 @@ public:
 };
 
 RNode removeDuplicates(RNode df);
+
+// Dedup veto for data skims that carry an event twice across files (two CRAB
+// tasks of one dataset). etc/dedup/make_veto.py decides, over the whole
+// dataset, which copy survives and writes the keys to drop per skim file as
+// <dedup_veto_dir>/<input basename>.u64 (little-endian uint64). A sample whose
+// metadata has no "dedup_veto_dir" is untouched. Key packing must match
+// make_veto.py; out-of-range values throw rather than alias.
+using DedupVetoSet = std::shared_ptr<const std::unordered_set<unsigned long long>>;
+unsigned long long dedupKey(unsigned int run, unsigned int lumi, unsigned long long event);
+RNode applyDedupVeto(RNode df);
 RNode applyObjectMask(RNode df, const std::string& maskName, const std::string& objectName);
 RNode applyObjectMaskNewAffix(RNode df, const std::string &maskName, const std::string &objectName, const std::string &newAffix);
 
