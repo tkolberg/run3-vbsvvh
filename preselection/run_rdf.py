@@ -33,7 +33,8 @@ NON_ANALYSIS_CHANNELS = {"1lep_WSF"}
 # production channels here.  The non-analysis channels are excluded too: they apply
 # another channel's efficiency payload and never produce one.
 B_TAG_EFF_EXCLUDED_CHANNELS = {"all_events"} | NON_ANALYSIS_CHANNELS
-SUPPORTED_BTAG_EFF_YEARS = {"2016preVFP", "2016postVFP", "2017", "2018", "2024Prompt"}
+SUPPORTED_BTAG_EFF_YEARS = {"2016preVFP", "2016postVFP", "2017", "2018", "2022Re-recoBCD",
+                            "2022Re-recoE+PromptFG", "2023PromptC", "2023PromptD", "2024Prompt"}
 
 # Where RDF productions go by default on Hipergator (/cmsuf). A single channel
 # production is O(TB), so it belongs on /cmsuf rather than the much smaller shared
