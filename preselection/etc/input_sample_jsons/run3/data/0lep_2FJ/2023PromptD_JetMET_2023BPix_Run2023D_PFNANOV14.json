@@ -126,7 +126,8 @@
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",
                 "sumw": 0.0,
-                "dedup_veto_dir": "/blue/avery/tkolberg.fsu/vbs/dedup_veto_2223/JetMET_2023BPix_Run2023D_PFNANOV14"
+                "dedup_veto_dir": "/blue/avery/tkolberg.fsu/vbs/dedup_veto_2223/JetMET_2023BPix_Run2023D_PFNANOV14",
+                "lumi_mask_json": "corrections/goldenJson/v14_coverage/mask_2023PromptD.json"
             }
         }
     }

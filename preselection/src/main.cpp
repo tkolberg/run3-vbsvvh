@@ -242,6 +242,7 @@ int main(int argc, char** argv) {
     if (isData) {
         std::cout << " -> Running data analysis" << std::endl;
         df = applyDedupVeto(df);
+        df = applySampleLumiMask(df);
         df = applyDataCorrections(df);
         df = runAnalysis(df, args.ana, args.run_number, isSignal, isData, spanet_inference.get(), spanet_inference_run2.get(), args.runSPANetInference);
         df = applyDataWeights(df);

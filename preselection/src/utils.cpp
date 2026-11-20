@@ -849,3 +849,25 @@ RNode applyQCDScoreResampling(RNode df, const std::string& run_number) {
     df = df.Redefine("fatjet_Wqq", [](const RVec<RVec<float>>& hv) { return hv[1]; }, {"_qcd_resampled_hv"});
     return df;
 }
+
+RNode applySampleLumiMask(RNode df) {
+    using MaskPtr = std::shared_ptr<const lumiMask>;
+    return df
+        .DefinePerSample("_sample_lumi_mask", [](unsigned int, const RSampleInfo &id) -> MaskPtr {
+            std::string path;
+            try {
+                path = id.GetS("lumi_mask_json");
+            } catch (const std::logic_error &) {  // key absent: no extra mask for this sample
+                return MaskPtr{};
+            }
+            static std::mutex mtx;
+            static std::unordered_map<std::string, MaskPtr> cache;
+            std::lock_guard<std::mutex> lock(mtx);
+            auto it = cache.find(path);
+            if (it != cache.end()) return it->second;
+            std::cout << " -> sample lumi mask " << path << std::endl;
+            return cache[path] = std::make_shared<const lumiMask>(lumiMask::fromJSON({path}));  // throws if unreadable
+        })
+        .Filter([](const MaskPtr &mask, unsigned int run, unsigned int lumi) { return !mask || mask->accept(run, lumi); },
+                {"_sample_lumi_mask", "run", "luminosityBlock"}, "SAMPLE LUMI MASK");
+}

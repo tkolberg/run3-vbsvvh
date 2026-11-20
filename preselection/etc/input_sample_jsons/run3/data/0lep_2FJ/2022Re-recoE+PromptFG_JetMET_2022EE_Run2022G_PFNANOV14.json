@@ -23,7 +23,8 @@
                 "shortname": "JetMET",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",
-                "sumw": 0.0
+                "sumw": 0.0,
+                "lumi_mask_json": "corrections/goldenJson/v14_coverage/mask_2022Re-recoE_PromptFG.json"
             }
         }
     }
