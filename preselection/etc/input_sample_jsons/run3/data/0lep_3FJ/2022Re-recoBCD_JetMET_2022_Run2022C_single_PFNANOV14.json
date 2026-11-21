@@ -17,7 +17,7 @@
                 "kind": "data",
                 "year": "2022Re-recoBCD",
                 "xsec": 1.0,
-                "lumi": 7.9804,
+                "lumi": 7.9408,
                 "shortname": "JetMET",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",

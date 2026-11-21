@@ -20,7 +20,7 @@
                 "kind": "data",
                 "year": "2023PromptC",
                 "xsec": 1.0,
-                "lumi": 17.794,
+                "lumi": 18.0620,
                 "shortname": "JetMET",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",

@@ -26,7 +26,7 @@
                 "kind": "bkg",
                 "year": "2022Re-recoE+PromptFG",
                 "xsec": 25.78,
-                "lumi": 26.6717,
+                "lumi": 26.6013,
                 "shortname": "QCD-4Jets_HT-2000_TuneCP5_13p6TeV",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",

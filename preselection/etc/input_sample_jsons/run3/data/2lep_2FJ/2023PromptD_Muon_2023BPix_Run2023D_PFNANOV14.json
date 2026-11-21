@@ -121,7 +121,7 @@
                 "kind": "data",
                 "year": "2023PromptD",
                 "xsec": 1.0,
-                "lumi": 9.451,
+                "lumi": 9.5068,
                 "shortname": "Muon",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",

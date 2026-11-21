@@ -32,7 +32,7 @@
                 "kind": "data",
                 "year": "2022Re-recoE+PromptFG",
                 "xsec": 1.0,
-                "lumi": 26.6717,
+                "lumi": 26.6013,
                 "shortname": "Muon",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",

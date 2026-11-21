@@ -11,7 +11,7 @@
                 "kind": "bkg",
                 "year": "2022Re-recoBCD",
                 "xsec": 7.568,
-                "lumi": 7.9804,
+                "lumi": 7.9408,
                 "shortname": "WZto2L2Q_TuneCP5_13p6TeV",
                 "do_ewk_corr": 0,
                 "local_prefix": "/cmsuf/data/store/user/phchang/skim/",
